@@ -43,7 +43,7 @@ class Config extends \Ilch\Config\Install
             'logo' => [
                 'type'        => 'mediaselection',
                 'default'     => '',
-                'description' => 'Logo (wird im Player angezeigt)',
+                'description' => 'Logo (wird im Player angezeigt) – Quadratisch, mind. 92×92 px, ideal 200×200 px',
             ],
 
             // ── Farben ────────────────────────────────────────

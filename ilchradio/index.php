@@ -49,8 +49,8 @@
 
     <?php if ($this->getLayoutSetting('logo')): ?>
         <img class="rp-logo"
-             src="<?=$this->getBaseUrl($this->getLayoutSetting('logo')) ?>"
-             alt="<?=$this->getLayoutSetting('stationname') ?>">
+             src="<?=$this->getBaseUrl(str_replace(' ', '%20', $this->getLayoutSetting('logo'))) ?>"
+             alt="<?=htmlspecialchars($this->getLayoutSetting('stationname')) ?>">
     <?php endif; ?>
 
     <span class="rp-name"><?=$this->getLayoutSetting('stationname') ?: 'Ilch Radio' ?></span>
@@ -77,8 +77,14 @@
         <div class="rp-sep"></div>
 
         <div class="rp-audio">
+            <?php
+            $streamUrl = $this->getLayoutSetting('streamurl');
+            $ext = strtolower(pathinfo(parse_url($streamUrl, PHP_URL_PATH), PATHINFO_EXTENSION));
+            $mimeMap = ['ogg' => 'audio/ogg', 'aac' => 'audio/aac', 'mp4' => 'audio/mp4', 'opus' => 'audio/ogg; codecs=opus'];
+            $mimeType = $mimeMap[$ext] ?? 'audio/mpeg';
+            ?>
             <audio id="rp-player" controls autoplay>
-                <source src="<?=$this->getLayoutSetting('streamurl') ?>" type="audio/mpeg">
+                <source src="<?=$streamUrl ?>" type="<?=$mimeType ?>">
                 <?=$this->getTrans('browsernotupport') ?>
             </audio>
         </div>
