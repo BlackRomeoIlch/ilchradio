@@ -13,7 +13,7 @@ class Config extends \Ilch\Config\Install
         'name'     => 'Ilch Radio',
         'version'  => '1.0.0',
         'ilchCore' => '2.2.0',
-        'author'   => 'Ilch Radio Team',
+        'author'   => 'Ilch.de',
         'link'     => '',
         'desc'     => 'Modernes Internet-Radio Layout mit Neon-Design',
         'layouts'  => [
@@ -87,15 +87,25 @@ class Config extends \Ilch\Config\Install
                 'type'        => 'separator',
                 'description' => 'Now Playing (Aktueller Titel)',
             ],
+            'servertype' => [
+                'type'    => 'select',
+                'default' => 'icy',
+                'options' => [
+                    'icy'          => 'ICY-Protokoll – Icecast / Shoutcast 1 & 2 (Standard)',
+                    'shoutcast2'   => 'Shoutcast 2 – JSON-API (/stats?json=1)',
+                    'icecast_json' => 'Icecast – JSON-Status (/status-json.xsl)',
+                    'manual'       => 'Manuell – eigene URL & JSON-Key (siehe Felder unten)',
+                ],
+            ],
             'metaurl' => [
                 'type'        => 'url',
                 'default'     => '',
-                'description' => 'JSON-API URL für aktuellen Titel (leer = deaktiviert)',
+                'description' => 'Nur bei Typ "Manuell": JSON-API URL für aktuellen Titel',
             ],
             'metakey' => [
                 'type'        => 'text',
                 'default'     => 'title',
-                'description' => 'JSON-Pfad zum Titel (Standard: title – bei eigenem API z.B. icestats.source.title)',
+                'description' => 'Nur bei Typ "Manuell": JSON-Pfad zum Titel (z.B. title oder icestats.source.title)',
             ],
 
             // ── Player-Bar ────────────────────────────────────
